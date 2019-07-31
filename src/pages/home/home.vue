@@ -1,12 +1,19 @@
 <template>
     <div class="">
-      hello world
+      <Header></Header>
+      <homeswiper></homeswiper>
     </div>
 </template>
 
 <script>
+  import Header from './components/Header'
+  import homeswiper from './components/swiper-vue'
 export default {
-    name: "home"
+    name: "home",
+    components:{
+      Header,
+      homeswiper
+    }
 }
 </script>
 
