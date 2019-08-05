@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  @import '~styles/varibles.styl'
 .header
   overflow hidden
   height .86rem
