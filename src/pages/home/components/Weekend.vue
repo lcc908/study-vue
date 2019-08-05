@@ -2,7 +2,7 @@
   <div>
     <div class="title">周末去哪儿</div>
     <ul>
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item of aaa" :key="item.id">
         <div class="item-img-wrapper">
           <img class="item-img" :src="item.imgUrl" />
         </div>
@@ -19,33 +19,7 @@
 <script>
     export default {
         name: "recomed",
-        data(){
-            return {
-                recommendList:[
-                    {
-                        id:'001',
-                        imgUrl:'http://img1.qunarzz.com/sight/source/1811/f3/86173f863bef61.jpg_r_640x214_52b003ac.jpg',
-                        title:'北京欢乐谷',
-                        desc:'很好玩'
-                    },{
-                        id:'002',
-                        imgUrl:'http://img1.qunarzz.com/sight/source/1811/f3/86173f863bef61.jpg_r_640x214_52b003ac.jpg',
-                        title:'北京欢乐谷',
-                        desc:'很好玩'
-                    },{
-                        id:'003',
-                        imgUrl:'http://img1.qunarzz.com/sight/source/1505/aa/7baaf8a851d221.jpg_r_640x214_1431200f.jpg',
-                        title:'北京欢乐谷',
-                        desc:'很好玩'
-                    },{
-                        id:'004',
-                        imgUrl:'http://img1.qunarzz.com/sight/source/1606/85/c6b6bad1b977e.jpg_r_640x214_5c638941.jpg',
-                        title:'北京欢乐谷',
-                        desc:'很好玩'
-                    }
-                ]
-            }
-        }
+        props:['aaa']
     }
 </script>
 
