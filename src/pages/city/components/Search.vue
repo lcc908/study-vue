@@ -1,27 +1,25 @@
 <template>
   <div>
     <div class="search">
-      <input class="search-input" type="text" placeholder="输入城市名或拼音" />
+      <input v-model="keyword" class="search-input" type="text" placeholder="输入城市名或拼音" />
     </div>
-    <!--<div-->
-      <!--class="search-content"-->
-      <!--ref="search"-->
-      <!--v-show="keyword"-->
-    <!--&gt;-->
-      <!--&lt;!&ndash;<ul>&ndash;&gt;-->
-        <!--&lt;!&ndash;<li&ndash;&gt;-->
-          <!--&lt;!&ndash;class="search-item border-bottom"&ndash;&gt;-->
-          <!--&lt;!&ndash;v-for="item of list"&ndash;&gt;-->
-          <!--&lt;!&ndash;:key="item.id"&ndash;&gt;-->
-          <!--&lt;!&ndash;@click="handleCityClick(item.name)"&ndash;&gt;-->
-        <!--&lt;!&ndash;&gt;&ndash;&gt;-->
-          <!--&lt;!&ndash;{{item.name}}&ndash;&gt;-->
-        <!--&lt;!&ndash;</li>&ndash;&gt;-->
-        <!--&lt;!&ndash;<li class="search-item border-bottom" v-show="hasNoData">&ndash;&gt;-->
-          <!--&lt;!&ndash;没有找到匹配数据&ndash;&gt;-->
-        <!--&lt;!&ndash;</li>&ndash;&gt;-->
-      <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-    <!--</div>-->
+    <div
+      class="search-content"
+      ref="search"
+      v-show="keyword"
+    >
+      <ul>
+        <li
+          class="search-item border-bottom"
+          v-for="item of list"
+        >
+         {{item.name}}
+        </li>
+        <li class="search-item border-bottom">
+          没有找到匹配数据
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -30,6 +28,35 @@
 // import { mapMutations } from 'vuex'
 export default {
   name: 'CitySearch',
+  props:{
+    cities:Object
+  },
+  data(){
+    return {
+      keyword:'',
+      list:[],
+      timer:null
+    }
+  },
+  watch:{
+    keyword(){
+      if(this.timer){
+        clearTimeout(this.timer)
+      }
+      this.timer = setTimeout(() => {
+        const result = []
+        for (let i in this.cities) {
+          console.log(this.cities[i]);
+          this.cities[i].forEach((value) => {
+            if (value.spell.indexOf(this.keyword) > -1 || value.name.indexOf(this.keyword) > -1) {
+              result.push(value)
+            }
+          })
+        }
+        this.list = result
+      }, 100)
+    }
+  }
   // props: {
   //   cities: Object
   // },
