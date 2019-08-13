@@ -16,10 +16,12 @@
 </template>
 
 <script>
+  import { mapState,mapGetters } from 'vuex'
     export default {
         name: "Header",
-        props:{
-            city:String
+        computed:{
+          ...mapState(['city']),
+          ...mapGetters(['douckty'])
         }
     }
 </script>

@@ -12,10 +12,11 @@
         <li
           class="search-item border-bottom"
           v-for="item of list"
+          @click="handleClick(item.name)"
         >
          {{item.name}}
         </li>
-        <li class="search-item border-bottom">
+        <li class="search-item border-bottom" v-show="hasList">
           没有找到匹配数据
         </li>
       </ul>
@@ -24,8 +25,8 @@
 </template>
 
 <script>
-// import Bscroll from 'better-scroll'
-// import { mapMutations } from 'vuex'
+import Bscroll from 'better-scroll'
+import { mapMutations } from 'vuex'
 export default {
   name: 'CitySearch',
   props:{
@@ -36,6 +37,11 @@ export default {
       keyword:'',
       list:[],
       timer:null
+    }
+  },
+  computed:{
+    hasList(){
+      return !this.list.length;
     }
   },
   watch:{
@@ -56,6 +62,16 @@ export default {
         this.list = result
       }, 100)
     }
+  },
+  mounted(){
+    this.scroll = new Bscroll(this.$refs.search)
+  },
+  methods:{
+    handleClick(city){
+      this.changeehere(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['changeehere'])
   }
   // props: {
   //   cities: Object
