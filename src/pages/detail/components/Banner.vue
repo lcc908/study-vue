@@ -1,40 +1,41 @@
 <template>
   <div>
     <div class="banner" @click="handleBaner">
-      <img class="banner-img" src="//img1.qunarzz.com/sight/p0/1804/1a/1a48cc20b0d6ed44a3.img.jpg_600x330_3f524da7.jpg" />
+      <img class="banner-img" :src="bannerImg" />
       <div class="banner-info">
         <div class="banner-tittle">
-          奥林匹克塔
+          {{this.sightName}}
         </div>
         <div class="banner-number">
           <span class="iconfont banner-icon">&#xe692;</span>
-          39
+          {{this.gallaryImgs.length}}
         </div>
       </div>
     </div>
-    <commongallary
-      :imgs="imgs"
-      v-show="showGallary"
-      @close="handclosess"
-    ></commongallary>
-    <!--<fade-animation>-->
-      <!--<common-gallary-->
-        <!--:imgs="bannerImgs"-->
-        <!--v-show="showGallary"-->
-        <!--@close="handleGallaryClose"-->
-      <!--&gt;</common-gallary>-->
-    <!--</fade-animation>-->
+    <FadeAnimation>
+      <commongallary
+        :imgs="gallaryImgs"
+        v-show="showGallary"
+        @close="handclosess"
+      ></commongallary>
+    </FadeAnimation>
   </div>
 </template>
 
 <script>
   import commongallary from 'common/gallary/Gallary'
 // import CommonGallary from 'common/gallary/Gallary'
-// import FadeAnimation from 'common/fade/FadeAnimation'
+import FadeAnimation from 'common/fade/fade'
 export default {
   name: 'DetailBanner',
   components:{
-    commongallary
+    commongallary,
+    FadeAnimation
+  },
+  props:{
+    sightName:String,
+    bannerImg:String,
+    gallaryImgs:Array,
   },
   data(){
     return {
@@ -49,6 +50,9 @@ export default {
     handclosess(){
       this.showGallary = false
     }
+  },
+  created(){
+
   }
   // props: {
   //   sightName: String,
